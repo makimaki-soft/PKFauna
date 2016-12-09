@@ -16,6 +16,8 @@ window.onload = function(){
                 }
             });
             cc.director.runScene(new MyScene());
+            var s = cc.TransitionCrossFade.create(2, new MyScene());
+    cc.director.runScene(s);
         }, this);
     };
     cc.game.run("gameCanvas");
