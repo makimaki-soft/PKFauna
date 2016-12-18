@@ -1,6 +1,6 @@
 var res = {
     circlelogo_png : "res/biglogostyle.png",
-    fushigibana_jpg : "res/fushigibana.jpeg",
+    cat_jpg : "res/cat.jpg",
 };
 
 var g_resources = [];

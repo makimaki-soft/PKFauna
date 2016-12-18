@@ -7,6 +7,20 @@
 <body>
     <canvas id="gameCanvas" width="800" height="450"></canvas>
 
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyByK5msqmF2wAVVY7KMEcZrUIXPwqLJM1w",
+            authDomain: "mypkfauna.firebaseapp.com",
+            databaseURL: "https://mypkfauna.firebaseio.com",
+            storageBucket: "mypkfauna.appspot.com",
+            messagingSenderId: "527732386062"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="src/pokemonDataManager.js" charset="UTF-8"></script>
+
     <script type="text/javascript" src="cocos2d-js-v3.13-lite.js" charset="UTF-8"></script>
     <script type="text/javascript" src="src/resource.js" charset="UTF-8"></script>
     <script type="text/javascript" src="src/CircleLogoScene.js" charset="UTF-8"></script>
