@@ -86,19 +86,32 @@ var PokemonCardCaseLayer = cc.LayerColor.extend({
  */
 var pokemonCardLayerEventListener = cc.EventListener.create({
     event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true, // don't pass to lower layer.
 
     onTouchBegan: function (touch, event) {
         cc.log("onTouchBegan");
 
         // ----- 画面上部だけタッチイベントを受け付ける。
-        var target = event.getCurrentTarget();
-        var location = target.convertToNodeSpace(touch.getLocation());
-        var cardCaseSize = target.getContentSize();
-        var cardCaseRect = cc.rect(0, 0, cardCaseSize.width, cardCaseSize.height/2);
-        if (cc.rectContainsPoint(cardCaseRect, location)) {
+        var size = cc.director.getWinSize();
+        // todo:画面サイズからとっているが、PokemonCardCaseLayerのインスタンスからとるべき。
+        var cardCaseRect = cc.rect(0, 0, size.width, size.height/2); 
+        
+        if (cc.rectContainsPoint(cardCaseRect, touch.getLocation())) {
             cc.log("カードケースがタッチされた。");
             return false;
         }
+
+        // ---- カードに触れたときだけタッチイベントを受け付ける。
+        var target = event.getCurrentTarget();
+        var location = target.convertToNodeSpace(touch.getLocation());
+        var cardSize = target.getContentSize();
+        var cardRect = cc.rect(0, 0, cardSize.width, cardSize.height);
+
+        if( !cc.rectContainsPoint(cardRect, location) ){
+            cc.log("カードの範囲外がタッチされた。");
+            return false;
+        }
+
         return true;
     },
 
