@@ -13,7 +13,7 @@ var GameBaseLayer = cc.Layer.extend({
          menu.alignItemsVertically(); //自動整列
          menu.setPosition(cc.p(size.width-50, size.height-20)); //画面中央に配置
 
-        this.addChild(menu, 3);
+        this.addChild(menu, 4);
 
         return true;
     },
@@ -86,19 +86,32 @@ var PokemonCardCaseLayer = cc.LayerColor.extend({
  */
 var pokemonCardLayerEventListener = cc.EventListener.create({
     event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true, // don't pass to lower layer.
 
     onTouchBegan: function (touch, event) {
         cc.log("onTouchBegan");
-
-        // ----- 画面上部だけタッチイベントを受け付ける。
         var target = event.getCurrentTarget();
-        var location = target.convertToNodeSpace(touch.getLocation());
-        var cardCaseSize = target.getContentSize();
-        var cardCaseRect = cc.rect(0, 0, cardCaseSize.width, cardCaseSize.height/2);
-        if (cc.rectContainsPoint(cardCaseRect, location)) {
+        
+        // ----- 画面上部だけタッチイベントを受け付ける。
+        var size = cc.director.getWinSize();
+        // todo:画面サイズからとっているが、PokemonCardCaseLayerのインスタンスからとるべき。
+        var cardCaseRect = cc.rect(0, 0, size.width, size.height/2); 
+        
+        if ( target.getLocalZOrder() == 1 && cc.rectContainsPoint(cardCaseRect, touch.getLocation())) {
             cc.log("カードケースがタッチされた。");
             return false;
         }
+
+        // ---- カードに触れたときだけタッチイベントを受け付ける。
+        var location = target.convertToNodeSpace(touch.getLocation());
+        var cardSize = target.getContentSize();
+        var cardRect = cc.rect(0, 0, cardSize.width, cardSize.height);
+
+        if( !cc.rectContainsPoint(cardRect, location) ){
+            cc.log("カードの範囲外がタッチされた。");
+            return false;
+        }
+
         return true;
     },
 
@@ -111,6 +124,13 @@ var pokemonCardLayerEventListener = cc.EventListener.create({
         var moveDistance = cc.pAdd(target.getPosition(), delta).y;
         if(moveDistance > 0) {
             target.setPositionY(moveDistance);
+        }
+
+        var size = cc.director.getWinSize();
+        // todo:画面サイズからとっているが、PokemonCardCaseLayerのインスタンスからとるべき。
+        var lowerEndPointY = target.convertToWorldSpace(cc.Point(0,0)).y;
+        if( target.getLocalZOrder() == 1 && lowerEndPointY >  size.height/2 ){
+            target.setLocalZOrder(3);
         }
 
         // ----- 答えを表示する
