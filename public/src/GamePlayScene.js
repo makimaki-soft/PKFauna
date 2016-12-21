@@ -4,7 +4,7 @@ var GameBaseLayer = cc.Layer.extend({
         var size = cc.director.getWinSize();
 
         // ----- ポケモンデータを取得して表示
-        this.addChild(new PokemonCardlayer(cc.color.RED, pokemonDataManager.get(1)), 1);
+        this.addChild(new PokemonCardlayer(cc.color.RED, pokemonDataManager.get(1)), 1, 151);
         this.addChild(new PokemonCardCaseLayer(cc.color.BLACK), 2);
 
          var nextBtn = new cc.MenuItemFont("次のポケモンへ", this.onTouchNextBtn, this);
@@ -21,9 +21,8 @@ var GameBaseLayer = cc.Layer.extend({
     // ----- 次の問題へ
     onTouchNextBtn:function (sender) {
         cc.log("Touch NextBtn");
-        // 0〜150の乱数を発生 ([10+1]を指定する)
-        var rand = Math.floor( Math.random() * 151) - 1;
-        this.addChild(new PokemonCardlayer(cc.color.RED, pokemonDataManager.get(rand)), 1);
+        this.removeChildByTag(151);
+        this.addChild(new PokemonCardlayer(cc.color.RED, pokemonDataManager.getNextPokemon()), 1, 151);
     },
 });
 
@@ -45,6 +44,12 @@ var PokemonCardlayer = cc.LayerColor.extend({
         this._super(color);
         var size = cc.director.getWinSize();
 
+        // ----- 全問完了
+        if(pokemonData == null) {
+            cc.log("game end");
+            return true;
+        }
+
         // ----- ポケモン名
         var labelPokemonName = cc.LabelTTF.create(pokemonData.name, "Arial", 20);
         console.log(labelPokemonName.height);
@@ -53,7 +58,7 @@ var PokemonCardlayer = cc.LayerColor.extend({
         this.addChild(labelPokemonName, 1);
 
         // ----- ポケモン画像
-        var spritePokemonImage = cc.Sprite.create(res.cat_jpg);
+        var spritePokemonImage = cc.Sprite.create(res.p27_png);
         spritePokemonImage.setPosition(cc.p(size.width / 2, size.height - labelPokemonName.height - spritePokemonImage.height/2));
         spritePokemonImage.setScale(1);
         this.addChild(spritePokemonImage);
