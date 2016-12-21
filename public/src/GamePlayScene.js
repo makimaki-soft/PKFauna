@@ -98,7 +98,6 @@ var pokemonCardLayerEventListener = cc.EventListener.create({
         var cardCaseRect = cc.rect(0, 0, size.width, size.height/2); 
         
         if ( target.getLocalZOrder() == 1 && cc.rectContainsPoint(cardCaseRect, touch.getLocation())) {
-            cc.log("カードケースがタッチされた。");
             return false;
         }
 
@@ -108,7 +107,6 @@ var pokemonCardLayerEventListener = cc.EventListener.create({
         var cardRect = cc.rect(0, 0, cardSize.width, cardSize.height);
 
         if( !cc.rectContainsPoint(cardRect, location) ){
-            cc.log("カードの範囲外がタッチされた。");
             return false;
         }
 
