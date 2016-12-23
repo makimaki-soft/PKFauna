@@ -4,10 +4,10 @@ var GameTitleLayer = cc.Layer.extend({
         var size = cc.director.getWinSize();
 
         // ----- ゲームロゴを作成
-        var sprite = cc.Sprite.create(res.cat_jpg);
+        var sprite = cc.Sprite.create(res.gamelog_png);
         sprite.setPosition(cc.p(size.width / 2, size.height / 2));  //画面の中心に
         sprite.setOpacity(0);   //透明度を0にして透明に [ 0 〜 255 ]
-        sprite.setScale(1);
+        sprite.setScale(0.5);
         this.addChild(sprite, 0);
 
         // ----- ゲームロゴをフェードインで表示
