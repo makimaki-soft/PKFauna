@@ -15,7 +15,11 @@ var pokemonDataManager = function(){
         for(var key in answerItem) {
             if(key in _data) {
                 if(key === "location") {
-                    answerChoices.push(String(_data[key].length) + " " + answerItem[key]);
+                    var keys = [];
+                    for(var n in _data[key]){
+                        keys.push(n);
+                    }
+                    answerChoices.push(String(keys.length) + " " + answerItem[key]);
                 }else {
                     answerChoices.push(answerItem[key]);
                 }
