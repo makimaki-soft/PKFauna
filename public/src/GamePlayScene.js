@@ -112,7 +112,7 @@ var PokemonCardlayer = cc.Layer.extend({
         this.addChild(labelPokemonHeight, 1);
 
         // 体重
-        var labelPokemonWeight = cc.LabelTTF.create("体重: " + pokemonData.height_m + "kg", "Meiryo", 15);
+        var labelPokemonWeight = cc.LabelTTF.create("体重: " + pokemonData.weight_kg + "kg", "Meiryo", 15);
         labelPokemonWeight.setPosition(cc.p(labelPokemonWeight.width / 2 + 5, size.height / 2 - 180 - 20*lineLength));
         labelPokemonWeight.setColor(cc.color.BLACK);
         this.addChild(labelPokemonWeight, 1);
