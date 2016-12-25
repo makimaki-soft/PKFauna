@@ -112,7 +112,7 @@ var PokemonCardlayer = cc.Layer.extend({
         this.addChild(labelPokemonHeight, 1);
 
         // 体重
-        var labelPokemonWeight = cc.LabelTTF.create("体重: " + pokemonData.height_m + "kg", "Meiryo", 15);
+        var labelPokemonWeight = cc.LabelTTF.create("体重: " + pokemonData.weight_kg + "kg", "Meiryo", 15);
         labelPokemonWeight.setPosition(cc.p(labelPokemonWeight.width / 2 + 5, size.height / 2 - 180 - 20*lineLength));
         labelPokemonWeight.setColor(cc.color.BLACK);
         this.addChild(labelPokemonWeight, 1);
@@ -137,12 +137,24 @@ var PokemonCardlayer = cc.Layer.extend({
 
         // 生息地
         if(pokemonData.location) {
+
+            // DBの整理で飛び番になる可能性あり。
+            var keys = [];
+            for(var key in pokemonData.location) {
+                keys.push(key);
+             }
+
             var labelPokemonLocation = cc.LabelTTF.create("生息地: ", "Meiryo", 15);
             labelPokemonLocation.setPosition(cc.p(labelPokemonLocation.width / 2 + 5, size.height / 2 - 300 - 20*lineLength));
             labelPokemonLocation.setColor(cc.color.BLACK);
             this.addChild(labelPokemonLocation, 1);
-            for(var i=0; i < pokemonData.location.length/2; i=i+2) {
-                var labelPokemonLocationN = cc.LabelTTF.create(pokemonData.location[i] + "、 " + pokemonData.location[i+1], "Meiryo", 15);
+            for(var i=0; i < keys.length; i=i+2) {
+                var str = pokemonData.location[keys[i]];
+                // 生息地数が奇数の場合にundefinedが表示されるのを防ぐ
+                if( pokemonData.location[keys[i+1]] ){
+                    str+= "、 " + pokemonData.location[keys[i+1]];
+                }
+                var labelPokemonLocationN = cc.LabelTTF.create(str, "Meiryo", 15);
                 labelPokemonLocationN.setPosition(cc.p(labelPokemonLocationN.width / 2 + 5, size.height / 2 - 320 - 20*lineLength - 20*i/2));
                 labelPokemonLocationN.setColor(cc.color.BLACK);
                 this.addChild(labelPokemonLocationN, 1);
