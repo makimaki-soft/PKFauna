@@ -42,6 +42,9 @@ var pokemonDataManager = function(){
             console.log(index);
             pokemonData[index]["answerChoices"] = getAnswerChoices(pokemonData[index]);
             return pokemonData[index];
+        },
+        reload : function(){
+            unshowList = Array.from(new Array(151)).map((v,i)=> i + 1);
         }
     }
 }();
