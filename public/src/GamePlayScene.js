@@ -156,14 +156,20 @@ var PokemonCardlayer = cc.Layer.extend({
             labelPokemonLocation.setPosition(cc.p(labelPokemonLocation.width / 2 + 5, size.height / 2 - 300 - 20*lineLength));
             labelPokemonLocation.setColor(cc.color.BLACK);
             this.addChild(labelPokemonLocation, 1);
-            for(var i=0; i < keys.length; i=i+2) {
-                var str = pokemonData.location[keys[i]];
+            var numPerLine = 4;
+            for(var i=0; i < keys.length; i=i+numPerLine) {
                 // 生息地数が奇数の場合にundefinedが表示されるのを防ぐ
-                if( pokemonData.location[keys[i+1]] ){
-                    str+= "、 " + pokemonData.location[keys[i+1]];
+                var str = "";
+                for(var j=0; j<numPerLine; j++){
+                    if(pokemonData.location[keys[i+j]]){
+                        if(j>0){
+                            str+= "、 ";
+                        }
+                        str+= pokemonData.location[keys[i+j]];
+                    }
                 }
                 var labelPokemonLocationN = cc.LabelTTF.create(str, "Meiryo", 15);
-                labelPokemonLocationN.setPosition(cc.p(labelPokemonLocationN.width / 2 + 5, size.height / 2 - 320 - 20*lineLength - 20*i/2));
+                labelPokemonLocationN.setPosition(cc.p(labelPokemonLocationN.width / 2 + 5, size.height / 2 - 320 - 20*lineLength - 20*i/4));
                 labelPokemonLocationN.setColor(cc.color.BLACK);
                 this.addChild(labelPokemonLocationN, 1);
             }
