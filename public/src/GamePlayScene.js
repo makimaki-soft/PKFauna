@@ -18,7 +18,7 @@ var GameBaseLayer = cc.Layer.extend({
         nextBtn.setScale(0.5);
         var menu = new cc.Menu(nextBtn,reloadBtn);
         menu.alignItemsVertically(); //自動整列
-        menu.setPosition(cc.p(size.width-50, size.height-30));
+        menu.setPosition(cc.p(size.width-50, size.height-60));
 
         this.addChild(menu, 4);
 
