@@ -7,13 +7,16 @@ var GameBaseLayer = cc.Layer.extend({
         this.addChild(new PokemonCardlayer(pokemonDataManager.getNextPokemon()), 1, 151);
         this.addChild(new PokemonCardCaseLayer(cc.color.BLACK), 2);
 
+        var reloadBtn = new cc.MenuItemImage.create(res.reload_png, null, null, this.onTouchReloadButton, this);
+        reloadBtn.setScale(0.5);
+
         var nextBtn = new cc.MenuItemImage.create(res.nextbtn_png, null, null, this.onTouchNextBtn, this);
 //        spriteNextBtn.setPosition(cc.p(size.width / 2, size.height / 2));
 //        spriteNextBtn.setScale(1);
 //         var nextBtn = new cc.MenuItemFont("次のポケモンへ", this.onTouchNextBtn, this);
 //         nextBtn.setColor(cc.color.WHITE);
         nextBtn.setScale(0.5);
-        var menu = new cc.Menu(nextBtn);
+        var menu = new cc.Menu(nextBtn,reloadBtn);
         menu.alignItemsVertically(); //自動整列
         menu.setPosition(cc.p(size.width-50, size.height-30));
 
@@ -28,6 +31,11 @@ var GameBaseLayer = cc.Layer.extend({
         this.removeChildByTag(151);
         this.addChild(new PokemonCardlayer(pokemonDataManager.getNextPokemon()), 1, 151);
     },
+    onTouchReloadButton:function(sender){
+        cc.log("Touch ReloadBtn");
+        pokemonDataManager.reload();
+        this.onTouchNextBtn(sender);
+    }
 });
 
 var GamePlayScene = cc.Scene.extend({
