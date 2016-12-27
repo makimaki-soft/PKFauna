@@ -1,6 +1,7 @@
 var res = {
     circlelogo_png : "res/biglogostyle.png",
     gamelog_png : "res/logo.png",
+    gamebg_jpg : "res/fauna.jpg",
     cardbackground_png : "res/cardbackground.png",
     nextbtn_png : "res/next.png",
     reload_png : "res/mark_arrow_reload.png",
