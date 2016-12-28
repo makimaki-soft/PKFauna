@@ -1,0 +1,101 @@
+/*
+ * common
+ */
+body {
+    font-family: "メイリオ", sans-serif;
+}
+
+
+a {
+    color: #333;
+    font-weight: bold;
+}
+
+/* スマホだけ */
+@media (max-width: 767px) {
+    .container {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .photo {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}
+
+
+/*
+ * header
+ */
+
+header {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    height: 100%;
+    border-bottom: #d6d6d6 solid 1px;
+    border-top: #3c763d solid 3px;
+}
+
+header img.logo{
+    max-height: 50px;
+}
+
+/* スマホだけ */
+@media (max-width: 767px) {
+    header {
+        padding-top: 3px;
+        padding-bottom: 1px;
+    }
+}
+
+
+/*
+ * section
+ */
+section div {
+    padding-bottom: 5px;
+}
+
+/*
+ * about section
+ */
+section.about {
+    display: block;
+}
+
+section.about h3 {
+    padding-top: 10px;
+    padding-left: 0px;
+    font-weight: bold;
+    border-bottom: #e6e6e6 solid 2px;
+}
+
+section.about h4 {
+    font-weight: bold;
+    border-bottom: #e6e6e6 dotted 2px;
+    padding-top: 10px;
+}
+
+section.about h5 {
+    border-bottom: #e6e6e6 dotted 2px;
+    padding-top: 10px;
+}
+
+section.about img {
+    max-width: 350px;
+}
+
+/*
+ * footer
+ */
+footer {
+    background: #232323;
+    color: #FFF;
+}
+
+footer address {
+    padding-top: 15px;
+}
+
