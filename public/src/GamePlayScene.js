@@ -11,10 +11,6 @@ var GameBaseLayer = cc.Layer.extend({
         reloadBtn.setScale(0.5);
 
         var nextBtn = new cc.MenuItemImage.create(res.nextbtn_png, null, null, this.onTouchNextBtn, this);
-//        spriteNextBtn.setPosition(cc.p(size.width / 2, size.height / 2));
-//        spriteNextBtn.setScale(1);
-//         var nextBtn = new cc.MenuItemFont("次のポケモンへ", this.onTouchNextBtn, this);
-//         nextBtn.setColor(cc.color.WHITE);
         nextBtn.setScale(0.5);
         var menu = new cc.Menu(nextBtn,reloadBtn);
         menu.alignItemsVertically(); //自動整列
@@ -60,6 +56,8 @@ var PokemonCardlayer = cc.Layer.extend({
         cc.log(pokemonData);
         if(pokemonData == null) {
             cc.log("game end");
+            pokemonDataManager.reload();
+            cc.director.runScene(new GameTitleScene());
             return true;
         }
 
@@ -80,9 +78,9 @@ var PokemonCardlayer = cc.Layer.extend({
         this.addChild(labelPokemonName, 2);
 
         // ----- ポケモン画像
-        var spritePokemonImage = cc.Sprite.create(res.p27_png);
+        var spritePokemonImage = cc.Sprite.create(res["p"+pokemonData.id+"_png"]);
         spritePokemonImage.setPosition(cc.p(size.width / 2, size.height - 200));
-        spritePokemonImage.setScale(0.7);
+        spritePokemonImage.setScale(1.0);
         this.addChild(spritePokemonImage, 2);
 
         // ----- ポケモン回答種類
