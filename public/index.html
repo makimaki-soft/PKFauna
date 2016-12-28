@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello Cocos2d-JS</title> 
-
+    <title>ポケモンファウナ</title> 
+    <link rel="icon" href="./res/favicon.ico">
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="450"></canvas>
+    <canvas id="gameCanvas"></canvas>
 
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
     <script>
@@ -31,8 +31,10 @@
             cc.game.onStart = function(){
                 // ----- 画面にあわせてリサイズする
                 cc.view.adjustViewPort(true);
-                cc.view.setDesignResolutionSize(420, 740, cc.ResolutionPolicy.SHOW_ALL);
+                cc.view.enableRetina(true);
+                cc.view.setDesignResolutionSize(414, 736, cc.ResolutionPolicy.SHOW_ALL);
                 cc.view.resizeWithBrowserSize(true);
+                cc.view.enableAutoFullScreen(true);
 
                 //load resources
                 cc.LoaderScene.preload(g_resources, function () {

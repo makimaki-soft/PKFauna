@@ -4,5 +4,6 @@
     "showFPS"       : false,
     "id"            : "gameCanvas",
     "renderMode"    : 1,
+    "showFPS"       : false,
     "jsList"        : []
 }

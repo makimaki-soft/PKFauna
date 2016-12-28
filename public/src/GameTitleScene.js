@@ -5,19 +5,19 @@ var GameTitleLayer = cc.Layer.extend({
 
         // ----- ゲームロゴ背景を作成
         var gamebg = cc.Sprite.create(res.gamebg_jpg);
-        gamebg.setPosition(cc.p(size.width / 2, size.height / 2));  //画面の中心に
+        gamebg.setPosition(cc.p(size.width / 2, size.height / 2 - 30));
         gamebg.setOpacity(0);   //透明度を0にして透明に [ 0 〜 255 ]
         gamebg.setScale(0.5);
         this.addChild(gamebg, 0);
 
-        // ----- ゲームロゴをフェードインで表示
+        // ----- フェードインで表示
         var fadeIn = cc.FadeIn.create(1);
         gamebg.runAction(cc.Sequence.create(fadeIn));
 
 
         // ----- ゲームロゴを作成
         var sprite = cc.Sprite.create(res.gamelog_png);
-        sprite.setPosition(cc.p(size.width / 2, size.height-150));  //画面の中心に
+        sprite.setPosition(cc.p(size.width / 2, size.height-130));
         sprite.setOpacity(0);   //透明度を0にして透明に [ 0 〜 255 ]
         sprite.setScale(0.5);
         this.addChild(sprite, 0);
