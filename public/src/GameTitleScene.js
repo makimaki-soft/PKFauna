@@ -36,8 +36,21 @@ var GameTitleLayer = cc.Layer.extend({
         // ----- タッチイベントリスナー登録
         cc.eventManager.addListener(labelEventListener, label);
 
+        var howtoplayBtn = new cc.MenuItemImage.create(res.howtoplay_png, null, null, this.onTouchHowtoplayButton, this);
+        howtoplayBtn.setScale(0.3);
+
+        var menu = new cc.Menu(howtoplayBtn);
+        menu.alignItemsVertically(); //自動整列
+        menu.setPosition(cc.p(size.width-50, 50));
+
+        this.addChild(menu, 4);
+
         return true;
     },
+    onTouchHowtoplayButton:function(sender){
+        cc.log("onTouchHowtoplayButton");
+        location.href = "howtoplay.html";
+    }
 });
 
 var GameTitleScene = cc.Scene.extend({
